@@ -1,0 +1,41 @@
+# LAB 3 - Deployment
+
+## Goal
+
+Created a Deployment and understood rolling updates and rollbacks.
+
+## Commands Used
+
+kubectl apply -f deployment.yaml
+
+kubectl get deployments
+
+kubectl get rs
+
+kubectl get pods
+
+kubectl describe deployment nginx-deployment
+
+kubectl set image deployment/nginx-deployment nginx-container=nginx:1.29
+
+kubectl rollout history deployment/nginx-deployment
+
+kubectl rollout undo deployment/nginx-deployment
+
+## What I Learned
+
+- Deployment manages ReplicaSets.
+
+- ReplicaSet manages Pods.
+
+- Deployment creates a new ReplicaSet during updates.
+
+- Rolling updates avoid downtime.
+
+- Rollbacks reuse older ReplicaSets.
+
+- Old ReplicaSets are preserved for rollback.
+
+## Production Scenario
+
+Deployment allows zero-downtime upgrades and safe rollbacks in production environments.

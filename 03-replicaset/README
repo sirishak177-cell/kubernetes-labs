@@ -1,0 +1,63 @@
+# LAB 2 - ReplicaSet
+
+## Goal
+
+Created a ReplicaSet using YAML and understood how Kubernetes maintains the desired state.
+
+## Commands Used
+
+kubectl apply -f replicaset.yaml
+
+kubectl get rs
+
+kubectl get pods
+
+kubectl get pods -w
+
+kubectl describe rs nginx-replicaset
+
+kubectl delete pod <pod-name>
+
+kubectl label pod <pod-name> app=apache --overwrite
+
+kubectl get pods --show-labels
+
+## What Broke
+
+* Deleted a Pod managed by ReplicaSet.
+* Changed the label from `app=nginx` to `app=apache`.
+* ReplicaSet ignored the Pod because the selector and label did not match.
+
+## What Happened
+
+* ReplicaSet detected that the desired state was not met.
+* ReplicaSet checked the Pod template.
+* ReplicaSet controller requested the API server to create a new Pod.
+* Scheduler selected a node for the new Pod.
+* Kubernetes restored the desired state.
+
+## What I Learned
+
+* ReplicaSet maintains the desired number of Pods.
+* ReplicaSet uses selectors and labels to identify Pods.
+* ReplicaSet creates Pods from the Pod template.
+* Pods are ephemeral and receive random names.
+* ReplicaSet ignores orphan Pods.
+* Deleting an orphan Pod does not trigger auto-healing.
+* API server stores the cluster state.
+* ReplicaSet controller compares the desired state with the current state.
+
+## Production Scenario
+
+In production, ReplicaSets are used to ensure that applications remain highly available. If a Pod crashes, ReplicaSet automatically creates a replacement Pod without manual intervention.
+
+## Important Concepts
+
+Deployment → ReplicaSet → Pods
+
+ReplicaSet manages Pods.
+
+Scheduler decides where Pods run.
+
+API server stores the cluster state.
+
